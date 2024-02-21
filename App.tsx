@@ -1,117 +1,196 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
-import React from 'react';
-import type {PropsWithChildren} from 'react';
 import {
-  SafeAreaView,
+  Image,
   ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
-  useColorScheme,
+  TouchableOpacity,
   View,
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+const App = () => {
+  const cardsData = [
+    {
+      id: 1,
+      title: 'Special Dish',
+      description: 'Delicious dish with a special flavor.',
+      image: require('./src/assets/download.jpg'),
+    },
+    {
+      id: 2,
+      title: 'Chef Recommendation',
+      description: 'A masterpiece created by our chef.',
+      image: require('./src/assets/indian.jpg'),
+    },
+    {
+      id: 3,
+      title: 'Dessert Delight',
+      description: 'Sweet and satisfying desserts for you.',
+      image: require('./src/assets/download.jpg'),
+    },
+  ];
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
   return (
-    <View style={styles.sectionContainer}>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <TouchableOpacity style={styles.iconContainer}>
+          <Image
+            source={require('./src/assets/line.png')}
+            style={styles.iconImage}
+          />
+        </TouchableOpacity>
+        <Text style={{fontSize: 20, fontWeight: 'bold', color: '#ffffff'}}>
+          Home
+        </Text>
+        <TouchableOpacity style={styles.iconContainer}>
+          <Image
+            source={require('./src/assets/cart.png')}
+            style={styles.iconImage}
+          />
+        </TouchableOpacity>
+      </View>
+      <Image
+        style={styles.tinyLogo}
+        source={require('./src/assets/PosLogo2.png')}
+      />
       <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
+        style={{
+          fontSize: 34,
+          fontWeight: 'bold',
+          color: '#ff9800',
+          marginVertical: 5,
+        }}>
+        Welcome To Vass Res
       </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.scrollContainer}>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Catering</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Delivery</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Dine In</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Reservation</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Take Away</Text>
+        </TouchableOpacity>
+      </ScrollView>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.itemscrollContainer}>
+        {cardsData.map(card => (
+          <TouchableOpacity key={card.id} style={styles.card}>
+            <Image style={styles.cardImage} source={card.image} />
+            <View style={styles.cardContent}>
+              <Text style={styles.cardTitle}>{card.title}</Text>
+              <Text style={styles.cardDescription}>{card.description}</Text>
+            </View>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
+      <TouchableOpacity style={styles.loginbutton}>
+        <Text style={styles.buttonText}>Login/SignUp</Text>
+      </TouchableOpacity>
     </View>
   );
-}
-
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
+};
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  container: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    backgroundColor: '#11130c',
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
+  header: {
+    backgroundColor: '#ff9800',
+    padding: 15,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+    alignItems: 'center',
   },
-  sectionDescription: {
-    marginTop: 8,
+  headerText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#fff',
+  },
+  tinyLogo: {
+    height: 100,
+    marginTop: 30,
+    marginBottom: 10,
+    width: 100,
+  },
+  scrollContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  itemscrollContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+  },
+  card: {
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    marginHorizontal: 10,
+    overflow: 'hidden',
+    width: 250,
+  },
+  cardImage: {
+    height: 150,
+    width: '100%',
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+  },
+  cardContent: {
+    padding: 10,
+  },
+  cardTitle: {
     fontSize: 18,
-    fontWeight: '400',
+    fontWeight: 'bold',
+    color: '#333',
   },
-  highlight: {
-    fontWeight: '700',
+  cardDescription: {
+    fontSize: 14,
+    color: '#666',
+    marginTop: 5,
+  },
+  loginbutton: {
+    backgroundColor: '#ff9800',
+    height: 60,
+    width: 180,
+    justifyContent: 'center',
+    marginBottom: 30,
+    alignItems: 'center',
+    borderRadius: 10,
+  },
+  button: {
+    backgroundColor: '#ffffff',
+    height: 60,
+    width: 230,
+    justifyContent: 'center',
+    marginVertical: 13,
+    marginHorizontal: 5,
+    alignItems: 'center',
+    borderRadius: 10,
+  },
+  buttonText: {
+    fontSize: 18,
+    color: '#000000',
+    fontWeight: 'bold',
+  },
+  iconImage: {
+    height: 35,
+    width: 35,
   },
 });
 
